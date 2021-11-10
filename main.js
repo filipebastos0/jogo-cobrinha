@@ -1,7 +1,7 @@
-let canvas = document.getElementById("snake");
+let canvas = document.getElementById("snake"); // criando elemento que irá rodar o jogo
 let context = canvas.getContext("2d");
 let box = 32;
-let snake = [];
+let snake = []; //criar cobra como lista, já que será uma série de coordenadas, que quando pintadas, criam a forma da cobra em quadradinhos
 snake[0] = {
     x: 8 * box,
     y: 8 * box
@@ -14,7 +14,7 @@ let food = {
 
 function criarBG(){
     context.fillStyle = "lightgreen";
-    context.fillRect(0, 0, 16*box, 16*box);
+    context.fillRect(0, 0, 16*box, 16*box); //desenha o retângulo usando x, y e a largura e altura setadas
 }
 
 function criarCobrinha(){
@@ -26,10 +26,11 @@ function criarCobrinha(){
 
 function drawFood(){
     context.fillStyle = "red";
-    context.fillRect(food.x,food.y, box, box);
+    context.fillRect(food.x, food.y, box, box);
 }
 
-document.addEventListener('Keydown', update);
+//chama uma função quando um evento acontece
+document.addEventListener('keydown', update);
 
 function update(event){
     if(event.keyCode == 37 && direction != 'right') direction = 'left';
@@ -64,7 +65,7 @@ function iniciarJogo(){
     if(direction == "down") snakeY += box;
 
     if(snakeX != food.x || snakeY != food.y){
-        snake.pop();
+        snake.pop(); //pop tira o último elemento da lista
     }else{
         food.x = Math.floor(Math.random() * 15 + 1) * box;
         food.y = Math.floor(Math.random() * 15 + 1) * box;
@@ -75,8 +76,8 @@ function iniciarJogo(){
         y: snakeY
     }
 
-    snake.unshift(newHead);
+    snake.unshift(newHead); //método unshift adiciona como primeiro quadradinho da cobra
 };
 
-let jogo = setInterval(iniciarJogo, 100);
+let jogo = setInterval(iniciarJogo, 100); 
 
